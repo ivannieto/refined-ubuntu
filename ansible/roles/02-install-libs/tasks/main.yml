@@ -2,22 +2,22 @@
 
 - name: Install basic libraries
   apt:
-    pkg: "{{ item }}"
+    pkg: [
+        'libdouble-conversion1',
+        'libqt5core5a',
+        'libqt5dbus5',
+        'libqt5gui5',
+        'libqt5keychain1',
+        'libqt5network5',
+        'libqt5svg5',
+        'libqt5widgets5',
+        'libxcb-xinerama0',
+        'qt5-gtk-platformtheme',
+        'qttranslations5-l10n'
+    ]
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
-  with_items:
-    - libdouble-conversion1
-    - libqt5core5a
-    - libqt5dbus5
-    - libqt5gui5
-    - libqt5keychain1
-    - libqt5network5
-    - libqt5svg5
-    - libqt5widgets5
-    - libxcb-xinerama0
-    - qt5-gtk-platformtheme
-    - qttranslations5-l10n
 
 - name: Upgrade all packages to the latest version
   apt:

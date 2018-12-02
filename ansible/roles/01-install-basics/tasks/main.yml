@@ -2,76 +2,95 @@
 
 - name: Install basic programs
   apt:
-    pkg: "{{ item }}"
+    pkg: [
+        'afuse',
+        'aptitude',
+        'autoconf',
+        'automake',
+        'axel',
+        'build-essential',
+        'bzip2',
+        'colortest',
+        'curl',
+        'diffutils',
+        'dconf-tools',
+        'dos2unix',
+        'fdupes',
+        'ftp-ssl',
+        'gawk',
+        'gcc',
+        'git',
+        'git-core',
+        'git-flow',
+        'gparted',
+        'grep',
+        'gzip',
+        'gnome-themes-standard',
+        'gtk2-engines-murrine',
+        'htop',
+        'httping',
+        'iftop',
+        'imagemagick',
+        'iotop',
+        'less',
+        'lftp',
+        'libgtk-3-dev',
+        'lightdm-gtk-greeter-settings',
+        'make',
+        'nano',
+        'nfs-common',
+        'nmap',
+        'net-tools',
+        'openssl',
+        'pkg-config',
+        'p7zip-full',
+        'pv',
+        'pwgen',
+        'ranger',
+        'rar',
+        'rsync',
+        'smbclient',
+        'software-properties-common',
+        'sshfs',
+        'sshpass',
+        'tar',
+        'texinfo',
+        'tmux',
+        'trash-cli',
+        'tig',
+        'tilix',
+        'unzip',
+        'ubuntu-restricted-extras',
+        'vim',
+        'wget',
+        'whois',
+        'zeal',
+        'zip',
+        'zlib1g-dev',
+        'zsh'
+    ]
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
-  with_items:
-    - afuse
-    - aptitude
-    - autoconf
-    - automake
-    - axel
-    - build-essential
-    - bzip2
-    - colortest
-    - curl
-    - diffutils
-    - dconf-tools
-    - dos2unix
-    - fdupes
-    - ftp-ssl
-    - gawk
-    - gcc
-    - git
-    - git-core
-    - git-flow
-    - gparted
-    - grep
-    - gzip
-    - gnome-themes-standard
-    - gtk2-engines-murrine
-    - htop
-    - httping
-    - iftop
-    - imagemagick
-    - iotop
-    - less
-    - lftp
-    - libgtk-3-dev
-    - lightdm-gtk-greeter-settings
-    - make
-    - nano
-    - nfs-common
-    - nmap
-    - net-tools
-    - openssl
-    - pkg-config
-    - p7zip-full
-    - pv
-    - pwgen
-    - ranger
-    - rar
-    - rsync
-    - smbclient
-    - software-properties-common
-    - sshfs
-    - sshpass
-    - tar
-    - texinfo
-    - tmux
-    - trash-cli
-    - tig
-    - tilix
-    - unzip
-    - ubuntu-restricted-extras
-    - vim
-    - wget
-    - whois
-    - zeal
-    - zip
-    - zlib1g-dev
-    - zsh
+
+- name: Update repositories cache and install "fonts-powerline" package
+  apt:
+    pkg: fonts-powerline
+    state: latest
+    update_cache: yes
+    cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+
+- name: Clone patched powerline fonts from source
+  git:
+    repo: 'https://github.com/powerline/fonts.git'
+    dest: '{{ HOME }}/fonts'
+    depth: 1
+
+- name: List home
+  shell: 'ls {{ HOME }}'
+
+- name: Install patched powerline fonts from source
+  shell: 'cd {{ HOME }}/fonts && ./install.sh && cd .. && rm -rf fonts'
 
 - name: Upgrade all packages to the latest version
   apt:

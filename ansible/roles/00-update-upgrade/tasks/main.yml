@@ -1,0 +1,18 @@
+---
+
+- name: Ensure the system can use the HTTPS transport for APT
+  stat:
+    path: /usr/lib/apt/methods/https
+  register: APT_HTTPS_TRANSPORT
+
+- name: Install HTTPS transport for APT
+  apt:
+    pkg: apt-transport-https
+    state: installed
+  when: not APT_HTTPS_TRANSPORT.stat.exists
+
+- name: Update and Upgrade system from fresh installl
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: {{ APT_CACHE_VALID_TIME }}

@@ -1,0 +1,21 @@
+---
+
+- name: Check if openfortigui is already installed
+  command: dpkg-query -W openfortigui
+  register: openfortigui_check_deb
+  failed_when: openfortigui_check_deb.rc > 1
+  changed_when: openfortigui_check_deb.rc == 1
+  tags: vpn
+
+- name: Download openfortigui
+  get_url: 
+    url: "https://apt.iteas.at/iteas/pool/main/o/openfortigui/openfortigui_0.7.2-3_bionic_amd64.deb"
+    dest: "{{ HOME }}/Descargas/openfortigui_0.7.2-3_bionic_amd64.deb"
+  when: openfortigui_check_deb.rc == 1
+  tags: vpn
+
+- name: Install deb package for openfortigui
+  apt:
+    deb: "{{ HOME }}/Descargas/openfortigui_0.7.2-3_bionic_amd64.deb"
+  when: openfortigui_check_deb.rc == 1
+  tags: vpn

@@ -1,0 +1,22 @@
+---
+
+- name: Install git packages
+  apt:
+    pkg: [
+      'git',
+      'git-core',
+      'git-flow',
+      'gitk',
+      'gitg'
+    ]
+    state: latest
+    update_cache: yes
+    cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+
+- name: Config username for work
+  become_user: '{{ ansible_env.USER }}'
+  command: 'git config --global user.name "Ivan Nieto"'
+
+- name: Config user email for work
+  become_user: '{{ ansible_env.USER }}'
+  command: 'git config --global user.email "inieto@gradiant.org"'

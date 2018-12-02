@@ -1,5 +1,15 @@
 ---
 
+- name: Remove examples
+  file:
+    path: '{{ HOME }}/examples.desktop'
+    state: absent
+
+- name: Remove Amazon shit
+  file:
+    path: /usr/share/applications/ubuntu-amazon-default.desktop
+    state: absent
+
 - name: System configuration
   command: "{{ item }}"
   become_user: "{{ ansible_env.USER }}"

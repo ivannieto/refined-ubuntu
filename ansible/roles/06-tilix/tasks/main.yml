@@ -1,0 +1,47 @@
+---
+
+- name: Set Tilix as default terminal
+  command: "{{ item }}"
+  with_items:
+    - gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
+    - gsettings set org.gnome.desktop.default-applications.terminal exec 'tilix'
+
+- name: Create config folder for Tilix
+  file:
+    path: '{{ HOME }}/.config/tilix'
+    state: directory
+  
+- name: Create schemes folder for Tilix
+  file:
+    path: '{{ HOME }}/.config/tilix/schemes'
+    state: directory
+
+- name: Get "Argonaut" theme from github
+  get_url:
+    url: https://git.io/v7QV5
+    dest: '{{ HOME }}/.config/tilix/schemes/argonaut.json'
+
+- name: Ensure Tilix VTE issue is not solved
+  stat:
+    path: /etc/profile.d/vte.sh
+  register: VTE_SH
+
+- name: Symlink Tilix vte.sh
+  become: yes
+  shell: "sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh"
+  when: not VTE_SH.stat.exists
+
+- name: Fix Tilix VTE issue for zshrc
+  shell: "grep -q -F 'Fix for Tilix VTE' {{ HOME }}/.zshrc || echo '\n# Fix for Tilix VTE\nif [ $TILIX_ID ] || [ $VTE_VERSION ]; then source /etc/profile.d/vte.sh; fi\n' >> {{ HOME }}/.zshrc"
+  when: VTE_SH.stat.exists
+
+- name: Fix Tilix VTE issue for bashrc
+  shell: "grep -q -F 'Fix for Tilix VTE' {{ HOME }}/.bashrc || echo '\n# Fix for Tilix VTE\nif [ $TILIX_ID ] || [ $VTE_VERSION ]; then source /etc/profile.d/vte.sh; fi\n' >> {{ HOME }}/.bashrc"
+  when: VTE_SH.stat.exists
+
+- name: Manual configuration of Tilix terminal emulator
+  pause:
+    prompt: " \nOpen Tilix and configure manually through: \n \n
+    Tilix>Preferences>Profiles>Default>Color>Schema=Argonaut \n
+    Tilix>Preferences>Profiles>Default>General>Personalized Font=Fira Mono Powerline Regular 10. \n \n
+    When you are done, please press [Return] to continue. Press [Ctrl+C] and then [A] to abort"

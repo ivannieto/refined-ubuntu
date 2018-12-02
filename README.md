@@ -2,6 +2,9 @@
 
 Install and configure a custom Ubuntu 18.04 LTS version using Ansible.
 
+![desktop](docs/img/desktop.png "Logo Title Text 1")
+
+
 - Upgrade
 - Clean system from bloatware
 - Configure appearance
@@ -42,7 +45,9 @@ Install and configure a custom Ubuntu 18.04 LTS version using Ansible.
 - 16 - Install Spotify
 - 17 - Install OpenFortiGUI VPN
 
-# TODO
+## TODO
 
 - Add docs for env vars
+- Add Oh My Zsh
+- Add Miniconda3
 - Add vault

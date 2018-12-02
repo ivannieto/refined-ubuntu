@@ -1,0 +1,17 @@
+---
+
+- name: Update repositories cache and install "virtualbox" and "virtualbox-guest-additions-iso" packages
+  apt:
+    pkg: [
+      'virtualbox',
+      'virtualbox-guest-additions-iso'
+    ]
+    state: latest
+    update_cache: yes
+    cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+
+- name: Add {{ ansible_env.USER }} to vboxusers group
+  user:
+    name: '{{ ansible_env.USER }}'
+    group: 'vboxusers'
+    

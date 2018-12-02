@@ -8,6 +8,15 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: ssh
+  
+- name: Check if ssh key exists
+  stat:
+    path: '{{ HOME }}/.ssh/id_rsa'
+  register: SSH_KEY
+  tags: ssh
 
 - name: Generate default ssh key if not exists
-  shell: 'cat /dev/zero | ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -P ""'
+  shell: 'ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -P ""'
+  when: not SSH_KEY.stat.exists
+  tags: ssh

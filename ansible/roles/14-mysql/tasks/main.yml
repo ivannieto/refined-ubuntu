@@ -2,10 +2,11 @@
 
 - name: Install MySQL Server in a Non-Interactive mode. [1]
   shell: 'echo "mysql-server-5.7 mysql-server/root_password password root" | sudo debconf-set-selections'
+  tags: mysql
 
 - name: Install MySQL Server in a Non-Interactive mode. [2]
   shell: 'echo "mysql-server-5.7 mysql-server/root_password_again password root" | sudo debconf-set-selections'
-
+  tags: mysql
 
 - name: Install MySQL packages
   apt:
@@ -16,19 +17,23 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: mysql
 
 - name: Install with mysql_secure_installation default root with password root
   shell: '# Run the MySQL Secure Installation wizard
   echo -e "root\nn\nY\nY\nY\nY\n" | mysql_secure_installation
   sed -i "s/127.0.0.1$/0.0.0.0/g" /etc/mysql/mysql.conf.d/mysqld.cnf
   mysql -uroot -p -e {{ MYSQL_SET_DEFAULT_ROOT }}'
+  tags: mysql
 
 - name: Restart mysql service
   service: 
     name: mysql
     state: restarted
+  tags: mysql
 
 - name: Set custom root password
   pause:
     prompt: "\nPlease set your own password to secure MySQL installation.\n \n
     When you are done, please press [Return] to continue. Press [Ctrl+C] and then [A] to abort"
+  tags: mysql

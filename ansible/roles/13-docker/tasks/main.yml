@@ -2,14 +2,18 @@
 
 - name: Install Docker from official shell script
   shell: 'wget -qO- https://get.docker.com/ | sh'
+  tags: docker
 
 - name: Download and install docker-compose (takes a bit of time, be patient)
   shell: 'sh -c "curl -L https://github.com/docker/compose/releases/download/{{ DOCKER_COMPOSE_VERSION }}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"'
+  tags: docker
 
 - name: Make docker-compose executable
   file:
     dest: /usr/local/bin/docker-compose
     mode: a+x
+  tags: docker
 
 - name: Download and install docker-compose autocompletion
   shell: 'sh -c "curl -L https://raw.githubusercontent.com/docker/compose/{{ DOCKER_COMPOSE_VERSION }}/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose"'
+  tags: docker

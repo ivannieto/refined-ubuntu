@@ -2,19 +2,23 @@
 
 - name: Download Microsoft VSCode GPG key
   shell: 'curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg'
+  tags: vscode
 
 - name: Install Microsoft VSCode GPG key
   shell: 'install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/'
+  tags: vscode
 
 - name: Add Microsoft VSCode repository to sources.list
   apt_repository:
     repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main'
     state: present
+  tags: vscode
 
 - name: Remove Microsoft VSCode GPG key
   file:
     path: microsoft.gpg
     state: absent
+  tags: vscode
 
 - name: Install VSCode
   apt:
@@ -22,6 +26,7 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: vscode
 
 - name: Install VSCode Extensions
   become_user: '{{ ansible_env.USER }}'
@@ -135,9 +140,11 @@
     - code --install-extension xaver.clang-format
     - code --install-extension zhuangtongfa.Material-theme
     - code --install-extension Zignd.html-css-class-completion
+  tags: vscode
 
 - name: Copy config files form {{ playbook_dir }} into code conf
   become_user: '{{ ansible_env.USER }}'
   copy:
     src: './files/'
     dest: '{{ HOME }}/.config/Code/User/'
+  tags: vscode

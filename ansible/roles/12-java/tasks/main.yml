@@ -4,13 +4,16 @@
   apt_repository:
     repo: 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main'
     state: present
+  tags: java
 
 - name: Accept license non-interactive
   shell: 'echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections'
+  tags: java
 
 - name: Apt key
   become_user: '{{ ansible_env.USER }}'
   command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+  tags: java
 
 - name: Install Java8
   apt:
@@ -18,6 +21,7 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"   
+  tags: java
 
 - name: Ensure Java 8 becomes default java
   apt:
@@ -25,3 +29,4 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"    
+  tags: java

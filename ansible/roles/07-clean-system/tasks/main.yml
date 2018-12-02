@@ -4,11 +4,13 @@
   file:
     path: '{{ HOME }}/examples.desktop'
     state: absent
+  tags: clean
 
 - name: Remove Amazon shit
   file:
     path: /usr/share/applications/ubuntu-amazon-default.desktop
     state: absent
+  tags: clean
 
 - name: System configuration
   command: "{{ item }}"
@@ -37,6 +39,7 @@
     - gsettings set org.gnome.settings-daemon.plugins.power lid-close-battery-action 'nothing'
     - gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 16
     - gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
+  tags: clean
 
 - name: Ensure unity-control-center and gnome-control-center are installed
   apt:
@@ -47,3 +50,4 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: clean

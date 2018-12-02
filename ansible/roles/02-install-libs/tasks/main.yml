@@ -18,9 +18,11 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: libs
 
 - name: Upgrade all packages to the latest version
   apt:
     name: "*"
     state: latest
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: libs

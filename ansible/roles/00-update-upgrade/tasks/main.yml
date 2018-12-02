@@ -4,12 +4,14 @@
   stat:
     path: /usr/lib/apt/methods/https
   register: APT_HTTPS_TRANSPORT
+  tags: init
 
 - name: Update repositories cache and install "python3-apt" package
   apt:
     pkg: python3-apt
     state: latest
     update_cache: yes
+  tags: init
 
 - name: Install HTTPS transport for APT
   apt:
@@ -18,9 +20,11 @@
     with_items:
         - apt-transport-https
   when: not APT_HTTPS_TRANSPORT.stat.exists
+  tags: init
 
 - name: Update and Upgrade system from fresh installl
   apt:
     upgrade: yes
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: init

@@ -73,6 +73,7 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: basic
 
 - name: Update repositories cache and install "fonts-powerline" package
   apt:
@@ -80,21 +81,26 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: basic
 
 - name: Clone patched powerline fonts from source
   git:
     repo: 'https://github.com/powerline/fonts.git'
     dest: '{{ HOME }}/fonts'
     depth: 1
+  tags: basic
 
 - name: List home
   shell: 'ls {{ HOME }}'
+  tags: basic
 
 - name: Install patched powerline fonts from source
   shell: 'cd {{ HOME }}/fonts && ./install.sh && cd .. && rm -rf fonts'
+  tags: basic
 
 - name: Upgrade all packages to the latest version
   apt:
     name: "*"
     state: latest
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: basic

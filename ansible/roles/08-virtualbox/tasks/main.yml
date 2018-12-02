@@ -9,9 +9,10 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: vbox
 
 - name: Add {{ ansible_env.USER }} to vboxusers group
   user:
     name: '{{ ansible_env.USER }}'
     group: 'vboxusers'
-    
+  tags: vbox

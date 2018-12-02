@@ -2,11 +2,13 @@
 
 - name: Add Google Chrome key
   shell: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+  tags: chrome
 
 - name: Add Google Chrome apt repository
   apt_repository:
     repo: 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'
     state: present
+  tags: chrome
 
 - name: Install Chrome
   apt:
@@ -14,3 +16,4 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: chrome

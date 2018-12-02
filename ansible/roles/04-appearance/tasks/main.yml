@@ -6,22 +6,26 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
-    
+  tags: looknfeel
+
 - name: Update repositories cache and install "chrome-gnome-shell" package
   apt:
     pkg: chrome-gnome-shell
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: looknfeel
 
 - name: Install Firefox extension "gnome-shell-integration"
   pause:
     prompt: "\nPlease install manually Firefox extension 'gnome-shell-integration'. \n \n
     When you are done, please press [Return] to continue. Press [Ctrl+C] and then [A] to abort \n"
+  tags: looknfeel
 
 - name: Add Paper Icons repository snwh
   apt_repository:
     repo: ppa:snwh/ppa
+  tags: looknfeel
 
 - name: Update repositories cache and install "paper-icon-theme" package
   apt:
@@ -29,12 +33,14 @@
     state: latest
     update_cache: yes
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: looknfeel
 
 - name: Upgrade all packages to the latest version
   apt:
     pkg: "*"
     state: latest
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: looknfeel
 
 - name: Configure system wide appearance
   command: "{{ item }}"
@@ -48,3 +54,4 @@
     - gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark'
     ## Set default icons
     - gsettings set org.gnome.desktop.interface icon-theme 'Paper'
+  tags: looknfeel

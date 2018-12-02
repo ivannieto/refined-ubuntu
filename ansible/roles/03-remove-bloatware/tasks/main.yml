@@ -92,3 +92,4 @@
   apt:
     name: "*"
     state: latest
+    cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"

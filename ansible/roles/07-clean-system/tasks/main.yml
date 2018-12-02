@@ -58,3 +58,13 @@
     ## TODO - - gsettings set org.gnome.deja-dup periodic-period 1
     ## Proper form factor as netbook
     ## TODO - gsettings set com.canonical.Unity form-factor 'Netbook'
+
+- name: Ensure unity-control-center and gnome-control-center are installed
+  apt:
+    pkg: [
+        'unity-control-center',
+        'gnome-control-center'
+    ]
+    state: latest
+    update_cache: yes
+    cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"

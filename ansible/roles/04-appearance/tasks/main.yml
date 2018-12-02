@@ -19,8 +19,32 @@
     prompt: "\nPlease install manually Firefox extension 'gnome-shell-integration'. \n \n
     When you are done, please press [Return] to continue. Press [Ctrl+C] and then [A] to abort \n"
 
+- name: Add Paper Icons repository snwh
+  apt_repository:
+    repo: ppa:snwh/ppa
+
+- name: Update repositories cache and install "paper-icon-theme" package
+  apt:
+    pkg: paper-icon-theme
+    state: latest
+    update_cache: yes
+    cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+
 - name: Upgrade all packages to the latest version
   apt:
     pkg: "*"
     state: latest
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+
+- name: Configure system wide appearance
+  command: "{{ item }}"
+  become_user: "{{ ansible_env.USER }}"
+  with_items:
+    ## Set background picture
+    - gsettings set org.gnome.desktop.background picture-uri 'https://globalleadershipfoundation.com/assets/files/2015/09/1mp6lukmx2w-stefanus-martanto-setyo-husodo.jpg'
+    ## Set default Arc theme
+    - gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'dark'
+    - gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Darker'
+    - gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark'
+    ## Set default icons
+    - gsettings set org.gnome.desktop.interface icon-theme 'Paper'

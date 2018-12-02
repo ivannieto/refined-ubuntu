@@ -1,0 +1,22 @@
+---
+
+- name: Add Spotify key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+  tags: spotify
+
+- name: Add deb repository
+  apt_repository:
+    repo: 'deb http://repository.spotify.com stable non-free'
+    state: present
+  tags: spotify
+
+- name: Install Spotify
+  apt:
+    pkg: spotify-client
+    install_recommends: yes
+    state: latest
+    update_cache: yes
+    cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: spotify

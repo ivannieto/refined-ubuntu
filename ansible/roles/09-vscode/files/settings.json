@@ -1,0 +1,60 @@
+{
+    "window.zoomLevel": 0,
+    "terminal.integrated.fontFamily": "Meslo LG S for Powerline",
+    "angulardoc.username": "ivan.nieto.sousa@gmail.com",
+    "angulardoc.email": "ivan.nieto.sousa@gmail.com",
+    "jshint.enable": false,
+    "eslint.enable": false,
+    "editor.tabCompletion": true,
+    "sync.quietSync": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/.venv": true,
+        "**/.vscode": true
+    },
+    "git.confirmSync": false,
+    "editor.tabSize": 2,
+    "terminal.integrated.cursorStyle": "line",
+    "editor.lineHeight": 18,
+    "phpcs.enable": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "sync.gist": "a8ce5c334e71d9fde265e32c50429076",
+    "sync.host": "",
+    "sync.pathPrefix": "",
+    "sync.lastUpload": "2018-03-29T13:59:11.969Z",
+    "sync.autoDownload": false,
+    "sync.autoUpload": true,
+    "sync.lastDownload": "",
+    "sync.forceDownload": false,
+    "sync.askGistName": false,
+    "workbench.colorTheme": "Rocket",
+    "editor.fontFamily": "Meslo LG S for Powerline",
+    "git.enableSmartCommit": true,
+    "vsicons.projectDetection.autoReload": true,
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true,
+    "files.eol": "\n",
+    "todo-tree.defaultHighlight": {
+        "foreground": "green",
+        "type": "none"
+    },
+    "todo-tree.customHighlight": {
+        "TODO": {},
+        "FIXME": {}
+    },
+    "editor.matchBrackets": false,
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.presets.jsonOfficial": true,
+    "python.jediEnabled": false,
+    "shellformat.path": "/usr/local/bin/shfmt",
+    "editor.minimap.enabled": true,
+    "window.menuBarVisibility": "toggle",
+    "yaml.schemas": {
+        "file:///home/ivan/.vscode/extensions/gizmos.docs-yaml-0.1.11/schemas/toc.schema.json": "/toc\\.yml/i"
+    },
+    "workbench.startupEditor": "newUntitledFile"
+}

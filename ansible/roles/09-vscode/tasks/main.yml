@@ -1,0 +1,143 @@
+---
+
+- name: Download Microsoft VSCode GPG key
+  shell: 'curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg'
+
+- name: Install Microsoft VSCode GPG key
+  shell: 'install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/'
+
+- name: Add Microsoft VSCode repository to sources.list
+  apt_repository:
+    repo: 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main'
+    state: present
+
+- name: Remove Microsoft VSCode GPG key
+  file:
+    path: microsoft.gpg
+    state: absent
+
+- name: Install VSCode
+  apt:
+    pkg: code
+    state: latest
+    update_cache: yes
+    cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+
+- name: Install VSCode Extensions
+  become_user: '{{ ansible_env.USER }}'
+  command: "{{ item }}"
+  with_items:
+    - code --install-extension 2ndshift.fresh-material
+    - code --install-extension aaron-bond.better-comments
+    - code --install-extension aaronthomas.vscode-snazzy-operator
+    - code --install-extension abusaidm.html-snippets
+    - code --install-extension ahmadawais.shades-of-purple
+    - code --install-extension akamud.vscode-caniuse
+    - code --install-extension akamud.vscode-theme-onedark
+    - code --install-extension anseki.vscode-color
+    - code --install-extension austin.code-gnu-global
+    - code --install-extension azemoh.theme-onedark
+    - code --install-extension baterson.copy-django-model-fields
+    - code --install-extension batisteo.vscode-django
+    - code --install-extension bbenoist.vagrant
+    - code --install-extension bibhasdn.django-html
+    - code --install-extension bibhasdn.django-snippets
+    - code --install-extension brainfit.vscode-importmagic
+    - code --install-extension cheshirekow.cmake-format
+    - code --install-extension christian-kohler.npm-intellisense
+    - code --install-extension codezombiech.gitignore
+    - code --install-extension cstrap.flask-snippets
+    - code --install-extension danibram.theme-flatui
+    - code --install-extension danielpinto8zz6.c-cpp-compile-run
+    - code --install-extension DavidAnson.vscode-markdownlint
+    - code --install-extension dbaeumer.vscode-eslint
+    - code --install-extension donjayamanne.githistory
+    - code --install-extension donjayamanne.jquerysnippets
+    - code --install-extension donjayamanne.jupyter
+    - code --install-extension donjayamanne.python-extension-pack
+    - code --install-extension dzannotti.vscode-babel-coloring
+    - code --install-extension eamodio.gitlens
+    - code --install-extension edipox.feel-better
+    - code --install-extension EditorConfig.EditorConfig
+    - code --install-extension eg2.vscode-npm-script
+    - code --install-extension EliverLara.andromeda
+    - code --install-extension ffaraone.pyfilesgen
+    - code --install-extension fknop.vscode-npm
+    - code --install-extension fkrull.gtk-dark-titlebar
+    - code --install-extension formulahendry.auto-close-tag
+    - code --install-extension formulahendry.auto-rename-tag
+    - code --install-extension formulahendry.code-runner
+    - code --install-extension formulahendry.vscode-mysql
+    - code --install-extension freakypie.code-python-isort
+    - code --install-extension Gizmos.docs-yaml
+    - code --install-extension glen-84.sass-lint
+    - code --install-extension Gruntfuggly.todo-tree
+    - code --install-extension haaaad.ansible
+    - code --install-extension hemlok.framer-dark
+    - code --install-extension henriiik.docker-linter
+    - code --install-extension himanoa.Python-autopep8
+    - code --install-extension HookyQR.beautify
+    - code --install-extension hsnazar.hyper-term-theme
+    - code --install-extension humao.rest-client
+    - code --install-extension IBM.output-colorizer
+    - code --install-extension jbenden.c-cpp-flylint
+    - code --install-extension jeremyrajan.webpack
+    - code --install-extension joelday.docthis
+    - code --install-extension JohnyGeorges.jetjet-theme
+    - code --install-extension jolaleye.horizon-theme-vscode
+    - code --install-extension kisstkondoros.csstriggers
+    - code --install-extension legfrey.rocket-ui
+    - code --install-extension lihui.vs-color-picker
+    - code --install-extension lkytal.FlatUI
+    - code --install-extension magicstack.MagicPython
+    - code --install-extension marcostazi.VS-code-vagrantfile
+    - code --install-extension max-SS.Cyberpunk
+    - code --install-extension mitaki28.vscode-clang
+    - code --install-extension mkloubert.vscode-kanban
+    - code --install-extension mrmlnc.vscode-pugbeautify
+    - code --install-extension mrmlnc.vscode-puglint
+    - code --install-extension mrmlnc.vscode-scss
+    # TODO Extension MS-CEINTL.vscode-language-pack-es does not install
+    # - code --install-extension MS-CEINTL.vscode-language-pack-es
+    - code --install-extension ms-mssql.mssql
+    - code --install-extension ms-python.anaconda-extension-pack
+    - code --install-extension ms-python.python
+    - code --install-extension ms-vscode.cpptools
+    - code --install-extension ms-vscode.Theme-3024Kit
+    - code --install-extension naumovs.color-highlight
+    - code --install-extension Orta.vscode-jest
+    - code --install-extension PeterJausovec.vscode-docker
+    - code --install-extension PKief.material-icon-theme
+    - code --install-extension qinjia.seti-icons
+    - code --install-extension qinjia.view-in-browser
+    - code --install-extension rafamel.subtle-brackets
+    - code --install-extension redhat.vscode-yaml
+    - code --install-extension rickynormandeau.mariana-pro
+    - code --install-extension robertohuertasm.vscode-icons
+    - code --install-extension robinbentley.sass-indented
+    - code --install-extension rogalmic.bash-debug
+    - code --install-extension shakram02.bash-beautify
+    - code --install-extension Shan.code-settings-sync
+    - code --install-extension shanoor.vscode-nginx
+    - code --install-extension sidthesloth.html5-boilerplate
+    - code --install-extension tht13.python
+    - code --install-extension timonwong.ansible-autocomplete
+    - code --install-extension tushortz.python-extended-snippets
+    - code --install-extension twxs.cmake
+    - code --install-extension Tyriar.lorem-ipsum
+    - code --install-extension Tyriar.shell-launcher
+    - code --install-extension vector-of-bool.cmake-tools
+    - code --install-extension VisualStudioExptTeam.vscodeintellicode
+    - code --install-extension vscoss.vscode-ansible
+    - code --install-extension waderyan.babelrc
+    - code --install-extension waderyan.gitblame
+    - code --install-extension wholroyd.jinja
+    - code --install-extension xaver.clang-format
+    - code --install-extension zhuangtongfa.Material-theme
+    - code --install-extension Zignd.html-css-class-completion
+
+- name: Copy config files form {{ playbook_dir }} into code conf
+  become_user: '{{ ansible_env.USER }}'
+  copy:
+    src: './files/'
+    dest: '{{ HOME }}/.config/Code/User/'

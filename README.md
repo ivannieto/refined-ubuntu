@@ -10,7 +10,7 @@ Install and configure a custom Ubuntu 18.04 LTS version using Ansible.
 
 ## Requirements
 
-- Fresh install of Ubuntu 18.04 LTS
+- Fresh installation of Ubuntu 18.04 LTS
 - Python2.7
 
 ## Install
@@ -41,6 +41,11 @@ Install and configure a custom Ubuntu 18.04 LTS version using Ansible.
 - 15 - Install and Configure OpenSSH Server
 - 16 - Install Spotify
 - 17 - Install OpenFortiGUI VPN
+
+# TODO
+
+- Add docs for env vars
+- Add vault
 
 ----
 

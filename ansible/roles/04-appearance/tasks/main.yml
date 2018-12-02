@@ -16,7 +16,8 @@
 
 - name: Install Firefox extension "gnome-shell-integration"
   pause:
-    prompt: 'Please install manually Firefox extension "gnome-shell-integration". When you are done, please press [Return] to continue. Press [Ctrl+C] and then [A] to abort'
+    prompt: "\nPlease install manually Firefox extension 'gnome-shell-integration'. \n \n
+    When you are done, please press [Return] to continue. Press [Ctrl+C] and then [A] to abort \n"
 
 - name: Upgrade all packages to the latest version
   apt:

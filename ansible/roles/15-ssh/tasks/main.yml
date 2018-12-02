@@ -1,0 +1,13 @@
+---
+
+- name: Update repositories cache and install "openssh-server" package
+  apt:
+    pkg: [
+      'openssh-server'
+    ]
+    state: latest
+    update_cache: yes
+    cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+
+- name: Generate default ssh key if not exists
+  shell: 'cat /dev/zero | ssh-keygen -t rsa -f ~/.ssh/id_rsa -q -P ""'

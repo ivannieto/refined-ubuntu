@@ -46,7 +46,3 @@ Install and configure a custom Ubuntu 18.04 LTS version using Ansible.
 
 - Add docs for env vars
 - Add vault
-
-----
-
-See [BLUEPRINT.md](BLUEPRINT.md)

@@ -7,7 +7,7 @@
     - { role: 01-install-basics, become: true }
     - { role: 02-install-libs, become: true }
     - { role: 03-remove-bloatware, become: true }
-    # - { role: 04-appearance, become: true }
+    - { role: 04-appearance, become: true }
     # - { role: 05-oh-my-zsh, become: true }
     # - { role: 06-tilix, become: true }
     # - { role: 07-clean-system, become: true }

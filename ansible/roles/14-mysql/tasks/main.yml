@@ -21,7 +21,7 @@
   shell: '# Run the MySQL Secure Installation wizard
   echo -e "root\nn\nY\nY\nY\nY\n" | mysql_secure_installation
   sed -i "s/127.0.0.1$/0.0.0.0/g" /etc/mysql/mysql.conf.d/mysqld.cnf
-  mysql -uroot -p -e {{ MYSQL_QUERY }}'
+  mysql -uroot -p -e {{ MYSQL_SET_DEFAULT_ROOT }}'
 
 - name: Restart mysql service
   service: 

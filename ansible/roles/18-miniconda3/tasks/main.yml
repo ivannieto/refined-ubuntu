@@ -1,0 +1,77 @@
+---
+
+- name: check for installation of Miniconda
+  become: '{{miniconda_escalate}}'
+  stat:
+    path: '{{ miniconda_conda_bin }}'
+  changed_when: false
+  register: miniconda_conda_binary
+  tags: miniconda
+
+- when: not miniconda_conda_binary.stat.exists
+  block:
+    - name: download installer...
+      become: '{{miniconda_escalate}}'
+      become_user: root
+      get_url:
+        url: '{{miniconda_installer_url}}'
+        dest: /tmp/{{miniconda_installer_sh}}
+        timeout: '{{miniconda_timeout_seconds}}'
+        checksum: '{{miniconda_checksum}}'
+        mode: 0755
+      tags: miniconda
+
+    - name: installing....
+      become: '{{miniconda_escalate}}'
+      become_user: root
+      command: /tmp/{{miniconda_installer_sh}} -b -p {{miniconda_install_dir}}
+      args:
+        creates: '{{miniconda_install_dir}}'
+      tags: miniconda
+
+  always:
+    - name: deleting installer...
+      become: '{{miniconda_escalate}}'
+      become_user: root
+      file:
+        path: /tmp/{{miniconda_installer_sh}}
+        state: absent
+      tags: miniconda
+
+- name: link miniconda...
+  become: '{{miniconda_escalate}}'
+  become_user: root
+  file:
+    src: '{{miniconda_install_dir}}'
+    dest: '{{miniconda_link_dir}}'
+    state: link
+  tags: miniconda
+
+- name: update conda pkgs...
+  become: '{{miniconda_escalate}}'
+  become_user: root
+  when: miniconda_pkg_update
+  command: '{{miniconda_conda_bin}} update -y --all'
+  tags: miniconda
+
+- name: remove conda-curl since it conflicts with the system curl
+  become: yes
+  become_user: root
+  conda:
+    name: curl
+    state: absent
+    executable: '{{ miniconda_conda_bin }}'
+  tags: miniconda
+
+- name: make system default python etc...
+  when: miniconda_make_sys_default
+  become: yes
+  become_user: root
+  with_items:
+    - f: miniconda.sh
+      d: /etc/profile.d
+  template:
+    src: '{{item.f}}.j2'
+    dest: '{{item.d}}/{{item.f}}'
+    mode: '{{item.m|default("0644")}}'
+  tags: miniconda

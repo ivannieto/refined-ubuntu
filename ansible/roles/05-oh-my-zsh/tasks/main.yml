@@ -3,8 +3,10 @@
 
 - name: Install Oh My ZSH
   shell: "curl -L http://install.ohmyz.sh | sh creates=~/.oh-my-zsh"
+  tags: ohmyzsh
 
 - name: Copy custom template
   template: 
     src: zshrc.j2
     dest: ~/.zshrc
+  tags: ohmyzsh

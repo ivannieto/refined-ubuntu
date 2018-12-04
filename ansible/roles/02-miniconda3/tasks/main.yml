@@ -75,3 +75,7 @@
     dest: '{{item.d}}/{{item.f}}'
     mode: '{{item.m|default("0644")}}'
   tags: miniconda
+
+- name: reinstall ansible
+  pip:
+    name: ansible

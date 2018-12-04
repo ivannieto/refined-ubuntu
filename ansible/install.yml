@@ -8,7 +8,7 @@
     - { role: 02-install-libs, become: true }
     - { role: 03-remove-bloatware, become: true }
     - { role: 04-appearance, become: true }
-    - { role: 05-oh-my-zsh, become: true }
+    - { role: 05-oh-my-zsh, oh_my_zsh_theme: agnoster }
     - { role: 06-tilix, become: true }
     - { role: 07-clean-system, become: true }
     - { role: 08-virtualbox, become: true }
@@ -21,3 +21,4 @@
     - { role: 15-ssh, become: true }
     - { role: 16-spotify, become: true }
     - { role: 17-openfortigui, become: true }
+    - { role: 18-miniconda3 }

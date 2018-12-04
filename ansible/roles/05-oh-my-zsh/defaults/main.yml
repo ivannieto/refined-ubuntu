@@ -1,0 +1,7 @@
+---
+ZSH_CUSTOM_DIR: ~/.oh-my-zsh/custom
+OH_MY_ZSH_THEME: agnoster
+OH_MY_ZSH_CASE_SENSITIVE: "true"
+
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+OH_MY_ZSH_HISTORY_DATE_FORMAT: yyyy-mm-dd

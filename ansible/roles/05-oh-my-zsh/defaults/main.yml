@@ -1,4 +1,5 @@
 ---
+
 ZSH_CUSTOM_DIR: ~/.oh-my-zsh/custom
 OH_MY_ZSH_THEME: agnoster
 OH_MY_ZSH_CASE_SENSITIVE: "true"

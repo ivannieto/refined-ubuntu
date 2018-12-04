@@ -1,0 +1,3 @@
+---
+
+MYSQL_SET_DEFAULT_ROOT: 'USE mysql; UPDATE `user` SET `Host`="%" WHERE `User`="root" AND `Host`="localhost"; DELETE FROM `user` WHERE `Host` != "%" AND `User`="root"; FLUSH PRIVILEGES;'

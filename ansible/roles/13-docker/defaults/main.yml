@@ -1,0 +1,5 @@
+---
+
+DOCKER_COMPOSE_VERSION: '`git ls-remote https://github.com/docker/compose | grep refs/tags | grep -oP "[0-9]+\.[0-9][0-9]+\.[0-9]+$" | tail -n 1`'
+UNAME_S: '`uname -s`'
+UNAME_M: '`uname -m`'

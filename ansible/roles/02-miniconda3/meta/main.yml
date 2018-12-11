@@ -1,4 +1,5 @@
 ---
+
 galaxy_info:
   author: Andrew Rothstein
   description: installs Miniconda
@@ -23,9 +24,8 @@ galaxy_info:
     - python
     - conda
     - miniconda
-
-dependencies:
-  - src: andrewrothstein.bash
-    version: v1.1.1
-  - src: andrewrothstein.unarchive-deps
-    version: v1.0.9
+  dependencies:
+    - src: andrewrothstein.bash
+      version: v1.1.1
+    - src: andrewrothstein.unarchive-deps
+      version: v1.0.9

@@ -17,10 +17,10 @@
   become_user: "{{ ansible_env.USER }}"
   with_items:
     ## Show % battery
-    - gsettings set com.canonical.indicator.power show-percentage true
+    # - gsettings set com.canonical.indicator.power show-percentage true
     ## Preferred player Spotify
-    - gsettings set com.canonical.indicator.sound interested-media-players "['spotify.desktop']"
-    - gsettings set com.canonical.indicator.sound preferred-media-players "['spotify.desktop']"
+    # - gsettings set com.canonical.indicator.sound interested-media-players "['spotify.desktop']"
+    # - gsettings set com.canonical.indicator.sound preferred-media-players "['spotify.desktop']"
     ## Interval for notifier on updates
     - gsettings set com.ubuntu.update-notifier regular-auto-launch-interval 0
     ## Set styles for gedit

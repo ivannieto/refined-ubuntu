@@ -11,3 +11,8 @@
     src: zshrc.j2
     dest: ~/.zshrc
   tags: ohmyzsh
+
+- name: Set chsh
+  become_user: "{{ ansible_env.USER }}"
+  shell: 'chsh -s /bin/zsh &&  source {{ ansible_env.USER }}/home/.zshrc && sudo chsh -s /bin/zsh && sudo source {{ ansible_env.USER }}/home/.zshrc'
+  tags: ohmyzsh

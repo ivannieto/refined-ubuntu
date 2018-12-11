@@ -5,15 +5,18 @@
   tags: docker
 
 - name: Download and install docker-compose (takes a bit of time, be patient)
-  shell: 'sh -c "curl -L https://github.com/docker/compose/releases/download/{{ DOCKER_COMPOSE_VERSION }}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"'
-  tags: docker
+  become: yes
+  shell: 'sh -c "curl -L https://github.com/docker/compose/releases/download/{{ DOCKER_COMPOSE_VERSION }}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose"'
+  tags: docker-compose
 
 - name: Make docker-compose executable
+  become: yes
   file:
     dest: /usr/local/bin/docker-compose
     mode: a+x
-  tags: docker
+  tags: docker-compose
 
 - name: Download and install docker-compose autocompletion
-  shell: 'sh -c "curl -L https://raw.githubusercontent.com/docker/compose/{{ DOCKER_COMPOSE_VERSION }}/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose"'
-  tags: docker
+  become: yes
+  shell: 'sh -c "curl -L https://raw.githubusercontent.com/docker/compose/{{ DOCKER_COMPOSE_VERSION }}/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose"'
+  tags: docker-compose

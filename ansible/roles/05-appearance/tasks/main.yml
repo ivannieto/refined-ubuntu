@@ -8,6 +8,14 @@
     cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
   tags: looknfeel
 
+- name: Update repositories cache and install "gnome-shell-extensions" package
+  apt:
+    pkg: arc-theme
+    state: latest
+    update_cache: yes
+    cache_valid_time: "{{ APT_CACHE_VALID_TIME }}"
+  tags: looknfeel
+
 - name: Update repositories cache and install "chrome-gnome-shell" package
   apt:
     pkg: chrome-gnome-shell
